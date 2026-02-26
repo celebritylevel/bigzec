@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents | ZEC Agents</title>
+    <meta name="description" content="12 AI Agents for B2B GTM teams. Each agent solves a specific revenue problem with measurable ROI in 30 days.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000000'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia, serif' font-size='18' font-weight='600' fill='%23d4a574'>ZEC</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-subtle: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            --accent: #d4a574;
+            --accent-hover: #e5b885;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --border: #222222;
+            --border-light: #333333;
+            --success: #4ade80;
+            --warning: #fbbf24;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .page-header {
+            padding: 10rem 2rem 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .filter-bar {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 60px;
+            background: var(--bg-primary);
+            z-index: 50;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            padding: 3rem 2rem;
+        }
+
+        .agent-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .agent-card:hover {
+            border-color: var(--accent);
+        }
+
+        .agent-card.expanded {
+            grid-column: 1 / -1;
+        }
+
+        .agent-header {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .agent-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .agent-category {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .agent-metrics {
+            display: flex;
+            gap: 2rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg-subtle);
+            border-top: 1px solid var(--border);
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .metric-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        .agent-details {
+            display: none;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .agent-card.expanded .agent-details {
+            display: block;
+        }
+
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pain-points {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .pain-point {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .pain-icon {
+            color: var(--warning);
+            flex-shrink: 0;
+        }
+
+        .pain-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .workflow-steps {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .workflow-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--bg-subtle);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-content p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .services-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.375rem 0.75rem;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--text-secondary);
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .roi-item {
+            padding: 1rem;
+            background: var(--bg-subtle);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .roi-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--success);
+        }
+
+        .roi-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .pricing-box {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .pricing-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pricing-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .btn-expand {
+            font-family: 'IBM Plex Mono', monospace;
+            background: transparent;
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-expand:hover {
+            color: var(--accent-hover);
+        }
+
+        .btn-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cta:hover {
+            background: var(--accent-hover);
+        }
+
+        footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+            
+            .agent-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .agent-metrics {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            
+            .pricing-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .pricing-info {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">ZEC AGENTS</a>
+        <ul class="nav-links">
+            <li><a href="/agents.html" class="active">AGENTS</a></li>
+            <li><a href="/#how-it-works">HOW IT WORKS</a></li>
+            <li><a href="/#pricing">PRICING</a></li>
+        </ul>
+        <a href="/#contact" class="nav-cta">BOOK DEMO</a>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <p class="section-label">Revenue-First AI Agents</p>
+            <h1>12 Agents for Every GTM Challenge</h1>
+            <p>Each agent solves a specific revenue problem with measurable ROI in 30 days. Click any agent to see how it works, what services it connects to, and the impact it delivers.</p>
+        </div>
+    </section>
+
+    <section class="filter-bar">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Agents</button>
+                <button class="filter-btn" data-filter="marketing">Marketing</button>
+                <button class="filter-btn" data-filter="sales">Sales</button>
+                <button class="filter-btn" data-filter="success">Customer Success</button>
+                <button class="filter-btn" data-filter="ops">RevOps</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="agents-grid" id="agents-list">
+        
+        <!-- Agent 1: Creative Intelligence -->
+        <div class="agent-card" id="creative-intelligence" data-category="marketing">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🎨</div>
+                <div class="agent-info">
+                    <p class="agent-category">Marketing</p>
+                    <h3 class="agent-name">Creative Intelligence Suite</h3>
+                    <p class="agent-tagline">Beat Meta's Andromeda with AI-generated ad variants that eliminate creative fatigue</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">-40%</span>
+                    <span class="metric-label">CPC Reduction</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">5x</span>
+                    <span class="metric-label">Creative Velocity</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">14→3</span>
+                    <span class="metric-label">Day Fatigue Cycle</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Creative fatigue in 7 days - audiences see same ads, CTR drops 20-30%</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Meta's Andromeda algorithm penalizes repetitive creative, higher CPM</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Manual creative production takes 3 days per batch</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">No systematic way to discover customer pain points for messaging</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Pain Point Mining</h4>
+                                <p>Agent scrapes Reddit, G2, Trustpilot, support tickets to extract customer complaints and unmet needs</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Persona Evolution</h4>
+                                <p>Converts pain points into dynamic ICPs with specific messaging angles</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Creative Generation</h4>
+                                <p>Generates 100+ ad variants daily - hooks, visuals, formats optimized for Andromeda</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Performance Optimization</h4>
+                                <p>Auto-adjusts based on CPC, CTR, ROAS data - kills underperformers, scales winners</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Meta Ads API</span>
+                        <span class="service-tag">Perplexity</span>
+                        <span class="service-tag">GPT-4/Claude</span>
+                        <span class="service-tag">Reddit API</span>
+                        <span class="service-tag">G2 Reviews</span>
+                        <span class="service-tag">Trustpilot</span>
+                        <span class="service-tag">DALL-E</span>
+                        <span class="service-tag">Midjourney</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">-40%</span>
+                            <span class="roi-label">CPC Reduction</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+163%</span>
+                            <span class="roi-label">CTR Increase</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">100/week</span>
+                            <span class="roi-label">Creatives Generated</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">30hrs</span>
+                            <span class="roi-label">Designer Hours Saved</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$15,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$3,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">2-3 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Creative Intelligence')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 2: Signal-Based Outbound -->
+        <div class="agent-card" id="signal-outbound" data-category="sales">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🎯</div>
+                <div class="agent-info">
+                    <p class="agent-category">Sales</p>
+                    <h3 class="agent-name">Signal-Based Outbound Engine</h3>
+                    <p class="agent-tagline">Hyper-personalized LinkedIn and email outreach at scale using buying signals</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">5-7x</span>
+                    <span class="metric-label">Reply Rate</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">70%</span>
+                    <span class="metric-label">SDR Time Saved</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value"><60s</span>
+                    <span class="metric-label">Research Cycle</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">SDRs spend 70%+ of time on research, only 30% selling</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Generic outreach gets <1% reply rates</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">15-30 minutes per prospect for manual research</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Inconsistent follow-ups and multi-tool fragmentation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Signal Detection</h4>
+                                <p>Monitors LinkedIn posts, job changes, tech stack changes, intent data for buying signals</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Deep Enrichment</h4>
+                                <p>Aggregates data from Clay, Apollo, and 20+ sources for complete prospect profiles</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Hyper-Personalization</h4>
+                                <p>AI writes custom first lines referencing specific prospect context</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Multi-Channel Orchestration</h4>
+                                <p>Coordinates email sequences via Instantly + LinkedIn outreach via Expandi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">LinkedIn API</span>
+                        <span class="service-tag">Clay.com</span>
+                        <span class="service-tag">Apollo.io</span>
+                        <span class="service-tag">Instantly</span>
+                        <span class="service-tag">Expandi</span>
+                        <span class="service-tag">PhantomBuster</span>
+                        <span class="service-tag">GPT-4</span>
+                        <span class="service-tag">6sense</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">5-7x</span>
+                            <span class="roi-label">Reply Rate Lift</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">3.5x</span>
+                            <span class="roi-label">More Meetings</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">1-5hrs</span>
+                            <span class="roi-label">Weekly Time Saved</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+47%</span>
+                            <span class="roi-label">Conversion Rate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$20,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$4,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">3-4 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Signal-Based Outbound')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 3: RevOps Automation -->
+        <div class="agent-card" id="revops-automation" data-category="ops">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">📊</div>
+                <div class="agent-info">
+                    <p class="agent-category">RevOps</p>
+                    <h3 class="agent-name">Revenue Operations Automation</h3>
+                    <p class="agent-tagline">Auto-update CRM, forecast revenue, and flag deal risks in real-time</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">+35%</span>
+                    <span class="metric-label">Win Rate</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">100%</span>
+                    <span class="metric-label">CRM Hygiene</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">+25%</span>
+                    <span class="metric-label">Forecast Accuracy</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">CRM data hygiene at 40% vs 100% with automation - manual entry is burdensome</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Pipeline visibility gaps - stalled deals undetected until too late</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Sales-to-CS handoffs lose 30% context, causing early churn</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Forecasting takes days, not real-time</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>CRM Hygiene Bot</h4>
+                                <p>Auto-updates Salesforce/HubSpot fields from calls/emails - BANT, MEDDPICC fields filled</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Pipeline Health Monitor</h4>
+                                <p>Flags at-risk deals in real-time based on activity, stakeholder engagement, momentum</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Forecast Generator</h4>
+                                <p>Creates board-ready slides automatically from pipeline data</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Task Orchestrator</h4>
+                                <p>Triggers follow-ups, Slack alerts, handoffs automatically</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Salesforce</span>
+                        <span class="service-tag">HubSpot</span>
+                        <span class="service-tag">Gong</span>
+                        <span class="service-tag">Slack</span>
+                        <span class="service-tag">Outreach</span>
+                        <span class="service-tag">Clari</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">+35%</span>
+                            <span class="roi-label">Win Rate</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+25%</span>
+                            <span class="roi-label">Forecast Accuracy</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">91%</span>
+                            <span class="roi-label">Cost Savings</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">1 day</span>
+                            <span class="roi-label">Manager Time Saved</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$25,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$5,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">3-4 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('RevOps Automation')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 4: Customer Success -->
+        <div class="agent-card" id="customer-success" data-category="success">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🔄</div>
+                <div class="agent-info">
+                    <p class="agent-category">Customer Success</p>
+                    <h3 class="agent-name">Customer Success Revenue Engine</h3>
+                    <p class="agent-tagline">Predict churn weeks in advance and identify expansion opportunities</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">-30%</span>
+                    <span class="metric-label">Churn Reduction</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">+60%</span>
+                    <span class="metric-label">Expansion Revenue</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Only 23% of CX teams use AI - missing subtle churn signals in data</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Reactive monitoring - finding churn after it's too late</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">No systematic expansion opportunity identification</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Manual health scoring that doesn't predict outcomes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Churn Prediction</h4>
+                                <p>Analyzes usage patterns, login frequency, support tickets to predict churn weeks ahead (95% accuracy)</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Health Score Automation</h4>
+                                <p>Real-time account scoring combining structured and unstructured data</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Expansion Spotter</h4>
+                                <p>Identifies upsell/cross-sell opportunities from high-engagement signals</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Renewal Orchestrator</h4>
+                                <p>Automates outreach timing for renewals and expansion conversations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Gainsight</span>
+                        <span class="service-tag">ChurnZero</span>
+                        <span class="service-tag">Salesforce</span>
+                        <span class="service-tag">Zendesk</span>
+                        <span class="service-tag">Mixpanel</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">-30%</span>
+                            <span class="roi-label">Churn Reduction</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+60%</span>
+                            <span class="roi-label">Expansion Revenue</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">95%</span>
+                            <span class="roi-label">Prediction Accuracy</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">71%</span>
+                            <span class="roi-label">Prevention Rate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$18,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$4,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">3 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Customer Success')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 5: Competitive Intelligence -->
+        <div class="agent-card" id="competitive-intel" data-category="ops">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🕵️</div>
+                <div class="agent-info">
+                    <p class="agent-category">RevOps</p>
+                    <h3 class="agent-name">Competitive Intelligence Command Center</h3>
+                    <p class="agent-tagline">Real-time competitor monitoring, pricing tracking, and battle card generation</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">82%</span>
+                    <span class="metric-label">Visibility</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">Real-time</span>
+                    <span class="metric-label">Alerts</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">82% of companies lack real-time competitor visibility</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Manual competitive research is time-consuming and incomplete</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Pricing changes go unnoticed until deals are lost</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Battle cards are outdated the moment they're created</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Price Monitor</h4>
+                                <p>Tracks competitor pricing in real-time across portals and public pages</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Feature Release Tracker</h4>
+                                <p>Monitors product updates, launches, and changelog changes</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Win/Loss Analyzer</h4>
+                                <p>Extracts patterns from CRM data to identify competitive weaknesses</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Battle Card Generator</h4>
+                                <p>Auto-creates competitive materials that update dynamically</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Crayon</span>
+                        <span class="service-tag">Klue</span>
+                        <span class="service-tag">Semrush</span>
+                        <span class="service-tag">Salesforce</span>
+                        <span class="service-tag">Perplexity</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">82%</span>
+                            <span class="roi-label">Better Visibility</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Faster</span>
+                            <span class="roi-label">Response Time</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Auto</span>
+                            <span class="roi-label">Battle Cards</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">24/7</span>
+                            <span class="roi-label">Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$12,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$2,500</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">2 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Competitive Intelligence')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 6: Partner Channel -->
+        <div class="agent-card" id="partner-channel" data-category="sales">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🤝</div>
+                <div class="agent-info">
+                    <p class="agent-category">Sales</p>
+                    <h3 class="agent-name">Partner Channel Accelerator</h3>
+                    <p class="agent-tagline">Automate partner enablement, training, and MDF optimization</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">+109%</span>
+                    <span class="metric-label">Partner Engagement</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">Auto</span>
+                    <span class="metric-label">Training Paths</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Fragmented data across PRM, CRM, and enablement tools</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Partner teams lack AI fluency - readiness gaps stall growth</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Outdated enablement models misaligned with AI-driven demands</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">ROI measurement difficult - traditional metrics miss value</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Partner Performance Predictor</h4>
+                                <p>Identifies high-potential partners from activity and deal data</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Enablement Personalizer</h4>
+                                <p>Creates custom training paths per partner type, region, and stage</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>MDF Optimizer</h4>
+                                <p>Automates fund allocation based on ROI and performance</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Co-Marketing Generator</h4>
+                                <p>Creates partner-specific campaigns and playbooks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">PartnerStack</span>
+                        <span class="service-tag">Crossbeam</span>
+                        <span class="service-tag">Reveal</span>
+                        <span class="service-tag">Salesforce PRM</span>
+                        <span class="service-tag">HubSpot</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">+109%</span>
+                            <span class="roi-label">Partner Engagement</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Auto</span>
+                            <span class="roi-label">Onboarding</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Dynamic</span>
+                            <span class="roi-label">Training</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Predictive</span>
+                            <span class="roi-label">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$22,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$4,500</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">4 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Partner Channel')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 7: Event & Webinar -->
+        <div class="agent-card" id="event-webinar" data-category="marketing">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">📅</div>
+                <div class="agent-info">
+                    <p class="agent-category">Marketing</p>
+                    <h3 class="agent-name">Event & Webinar Lead Machine</h3>
+                    <p class="agent-tagline">Predictive targeting, engagement scoring, and automated follow-up for events</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">+29%</span>
+                    <span class="metric-label">Open Rate</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">+41%</span>
+                    <span class="metric-label">CTR</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Scattered attendee feedback from multiple channels</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Late registrations cause forecasting errors</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Unhandled objections drop conversion rates</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Support overload during events loses engagement</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Attendee Predictor</h4>
+                                <p>Uses lookalike modeling to target likely attendees</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Registration Optimizer</h4>
+                                <p>A/B tests messaging and timing for maximum sign-ups</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Engagement Scorer</h4>
+                                <p>Ranks leads by webinar behavior and interaction</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Follow-Up Sequencer</h4>
+                                <p>Personalized nurture based on engagement level</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Zoom</span>
+                        <span class="service-tag">HubSpot</span>
+                        <span class="service-tag">Typeform</span>
+                        <span class="service-tag">Slack</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">+29%</span>
+                            <span class="roi-label">Higher Open Rate</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+41%</span>
+                            <span class="roi-label">Higher CTR</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Auto</span>
+                            <span class="roi-label">Lead Scoring</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+22%</span>
+                            <span class="roi-label">ROI on Ad Spend</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$10,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$2,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">2 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Event & Webinar')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 8: PLG Activation -->
+        <div class="agent-card" id="plg-activation" data-category="success">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🚀</div>
+                <div class="agent-info">
+                    <p class="agent-category">Customer Success</p>
+                    <h3 class="agent-name">PLG Activation Accelerator</h3>
+                    <p class="agent-tagline">Dynamic onboarding that guides users to "aha" moments faster</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">-40%</span>
+                    <span class="metric-label">Faster Onboarding</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">-30%</span>
+                    <span class="metric-label">Support Tickets</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Steep learning curves delay time-to-value</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">One-size-fits-all onboarding ignores user goals</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">High drop-off before activation "aha" moment</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Team members in enterprise lack proper handoffs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Onboarding Optimizer</h4>
+                                <p>Dynamic flows based on user type, role, and goals</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Feature Discovery Agent</h4>
+                                <p>Guides users to "aha" moments with contextual tips</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>PQL Identifier</h4>
+                                <p>Spots product-qualified leads from usage patterns</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Expansion Trigger</h4>
+                                <p>Prompts upgrades at perfect timing based on behavior</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Mixpanel</span>
+                        <span class="service-tag">Amplitude</span>
+                        <span class="service-tag">Intercom</span>
+                        <span class="service-tag">Userpilot</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">-40%</span>
+                            <span class="roi-label">Faster Onboarding</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">-30%</span>
+                            <span class="roi-label">Fewer Support Tickets</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+PQL</span>
+                            <span class="roi-label">Lead Identification</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Dynamic</span>
+                            <span class="roi-label">Flows</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$15,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$3,500</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">3 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('PLG Activation')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 9: Content Multiplication -->
+        <div class="agent-card" id="content-multiplication" data-category="marketing">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">📝</div>
+                <div class="agent-info">
+                    <p class="agent-category">Marketing</p>
+                    <h3 class="agent-name">Content Multiplication Engine</h3>
+                    <p class="agent-tagline">Transform one piece of content into 50+ platform-optimized formats</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">5x</span>
+                    <span class="metric-label">Content Reach</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">12hrs</span>
+                    <span class="metric-label">Weekly Saved</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Content saturation - AI floods market with similar content</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Homogenization - outputs from shared AI models sound identical</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Volume without narrative strategy fails to convert</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Discovery mediated by AI agents requires different optimization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Content Atomizer</h4>
+                                <p>Breaks long-form content into 50+ pieces - clips, posts, threads</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Platform Optimizer</h4>
+                                <p>Adapts for each channel's algorithm and audience expectations</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Trend Predictor</h4>
+                                <p>Times releases for maximum impact based on engagement data</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Performance Analyzer</h4>
+                                <p>Learns what resonates and iterates on successful formats</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Claude</span>
+                        <span class="service-tag">GPT-4</span>
+                        <span class="service-tag">Descript</span>
+                        <span class="service-tag">Buffer</span>
+                        <span class="service-tag">Hootsuite</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">5x</span>
+                            <span class="roi-label">Content Reach</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">12hrs</span>
+                            <span class="roi-label">Weekly Saved</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">50+</span>
+                            <span class="roi-label">Pieces/Content</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Auto</span>
+                            <span class="roi-label">Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$8,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$2,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">2 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Content Multiplication')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 10: Conversational Revenue Bot -->
+        <div class="agent-card" id="conversational-bot" data-category="sales">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">💬</div>
+                <div class="agent-info">
+                    <p class="agent-category">Sales</p>
+                    <h3 class="agent-name">Conversational Revenue Bot</h3>
+                    <p class="agent-tagline">24/7 lead qualification and meeting booking on your website</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">+70%</span>
+                    <span class="metric-label">Qualified Leads</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">-30%</span>
+                    <span class="metric-label">CAC</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Lead volume overload - slow response loses prospects</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Poor timing - missing in-market signals</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Generic messaging leads to low engagement</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">High CAC from inefficient prioritization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Intent Classification</h4>
+                                <p>Identifies visitor stage, needs, and buying signals</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Conversation Designer</h4>
+                                <p>Dynamic paths to conversion based on responses</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Lead Qualifier</h4>
+                                <p>BANT/MEDDIC scoring in chat for accurate routing</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Meeting Booker</h4>
+                                <p>Schedules with right AE instantly via Calendly integration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Intercom</span>
+                        <span class="service-tag">Drift</span>
+                        <span class="service-tag">HubSpot</span>
+                        <span class="service-tag">Calendly</span>
+                        <span class="service-tag">Salesforce</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">+70%</span>
+                            <span class="roi-label">Qualified Leads</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">-30%</span>
+                            <span class="roi-label">CAC Reduction</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">24/7</span>
+                            <span class="roi-label">Availability</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">+35%</span>
+                            <span class="roi-label">Scoring Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$12,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$2,500</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">2 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Conversational Bot')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 11: Pricing Optimizer -->
+        <div class="agent-card" id="pricing-optimizer" data-category="ops">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">📈</div>
+                <div class="agent-info">
+                    <p class="agent-category">RevOps</p>
+                    <h3 class="agent-name">Pricing & Packaging Optimizer</h3>
+                    <p class="agent-tagline">Test elasticity, monitor competitors, optimize for revenue</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">+25%</span>
+                    <span class="metric-label">Revenue Increase</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">Real-time</span>
+                    <span class="metric-label">Elasticity</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Unreliable elasticity data - 23% cite as top blocker</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">SKU complexity - 65% struggle with vast assortments</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Data readiness delays - pricing AI is "phase-two"</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Manual pricing leaves money on table</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Elasticity Tester</h4>
+                                <p>Simulates price sensitivity across segments</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Competitor Analyzer</h4>
+                                <p>Monitors market pricing in real-time</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Usage Pattern Miner</h4>
+                                <p>Identifies natural tier boundaries from usage data</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Win Rate Calculator</h4>
+                                <p>Tests pricing impact on deal velocity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">Salesforce</span>
+                        <span class="service-tag">Stripe</span>
+                        <span class="service-tag">ProfitWell</span>
+                        <span class="service-tag">Perplexity</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">+15-25%</span>
+                            <span class="roi-label">Revenue Increase</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Auto</span>
+                            <span class="roi-label">Elasticity Testing</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Dynamic</span>
+                            <span class="roi-label">Pricing</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Real-time</span>
+                            <span class="roi-label">Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$20,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Type</span>
+                                <span class="pricing-value">One-time Project</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">3 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('Pricing Optimizer')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent 12: ABM Orchestration -->
+        <div class="agent-card" id="abm-orchestration" data-category="marketing">
+            <div class="agent-header" onclick="toggleAgent(this)">
+                <div class="agent-icon">🎯</div>
+                <div class="agent-info">
+                    <p class="agent-category">Marketing</p>
+                    <h3 class="agent-name">ABM Orchestration Platform</h3>
+                    <p class="agent-tagline">Signal-driven account engagement with surround-sound personalization</p>
+                </div>
+                <button class="btn-expand">DETAILS <span>↓</span></button>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <span class="metric-value">4x</span>
+                    <span class="metric-label">Engagement Lift</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">Always-on</span>
+                    <span class="metric-label">Orchestration</span>
+                </div>
+            </div>
+            <div class="agent-details">
+                <div class="detail-section">
+                    <h4 class="detail-title">Pain Points Solved</h4>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Execution capacity - ABM strategy hits human bandwidth bottleneck</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Timing gaps - 86% of B2B purchases stall without real-time engagement</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Multi-channel coordination - hard to sync ads, email, web, sales</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-icon">⚠️</span>
+                            <span class="pain-text">Data overload - can't analyze intent signals manually</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">How It Works</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Account Intelligence</h4>
+                                <p>Deep research on target accounts from multiple sources</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Stakeholder Mapper</h4>
+                                <p>Identifies all decision makers and their priorities</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Personalization Engine</h4>
+                                <p>Creates account-specific messaging and content</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Multi-Touch Coordinator</h4>
+                                <p>Orchestrates surround-sound campaigns across channels</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Services Connected</h4>
+                    <div class="services-list">
+                        <span class="service-tag">6sense</span>
+                        <span class="service-tag">Demandbase</span>
+                        <span class="service-tag">Terminus</span>
+                        <span class="service-tag">LinkedIn Ads</span>
+                        <span class="service-tag">HubSpot</span>
+                        <span class="service-tag">GPT-4</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">ROI Metrics</h4>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <span class="roi-value">4x</span>
+                            <span class="roi-label">Engagement Lift</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Auto</span>
+                            <span class="roi-label">Scoring</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Dynamic</span>
+                            <span class="roi-label">Content</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-value">Signal</span>
+                            <span class="roi-label">Driven</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4 class="detail-title">Pricing</h4>
+                    <div class="pricing-box">
+                        <div class="pricing-info">
+                            <div class="pricing-item">
+                                <span class="pricing-label">Setup</span>
+                                <span class="pricing-value">$30,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Monthly</span>
+                                <span class="pricing-value">$6,000</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span class="pricing-label">Timeline</span>
+                                <span class="pricing-value">4 Weeks</span>
+                            </div>
+                        </div>
+                        <button class="btn-cta" onclick="bookDemo('ABM Orchestration')">GET STARTED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">© 2026 ZEC Agents. Zero-Employee Company.</p>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/agents.html">Agents</a>
+                    <a href="https://github.com/celebritylevel/zec-agents">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAgent(header) {
+            const card = header.closest('.agent-card');
+            card.classList.toggle('expanded');
+            const btn = header.querySelector('.btn-expand');
+            if (card.classList.contains('expanded')) {
+                btn.innerHTML = 'COLLAPSE <span>↑</span>';
+            } else {
+                btn.innerHTML = 'DETAILS <span>↓</span>';
+            }
+        }
+
+        function bookDemo(agentName) {
+            alert('Thank you for your interest in ' + agentName + '! We will contact you shortly to schedule a demo.');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.agent-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Open agent from URL hash
+        if (window.location.hash) {
+            const agentId = window.location.hash.substring(1);
+            const agentCard = document.getElementById(agentId);
+            if (agentCard) {
+                agentCard.classList.add('expanded');
+                agentCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
+</body>
+</html>
