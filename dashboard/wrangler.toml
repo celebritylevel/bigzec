@@ -1,0 +1,24 @@
+name = "bigzec-dashboard"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+NODE_VERSION = "18"
+
+[env.production]
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Secrets (set via Cloudflare Pages dashboard or: wrangler secret put KEY_NAME) ──
+# APIFY_API_KEY          - Apify.com API key for LinkedIn post scraping
+# OPENROUTER_API_KEY     - OpenRouter API key (uses z-ai/glm-5 by default)
+# PERPLEXITY_API_KEY     - Perplexity AI API key
+# CF_ACCESS_TEAM_DOMAIN  - razvan-667.cloudflareaccess.com
+#
+# ── Cloudflare Zero Trust Setup ──
+# 1. Go to https://one.dash.cloudflare.com → Access → Applications → Add an application
+# 2. Choose "Self-hosted" and set the domain to your Pages domain
+# 3. Create a policy: Emails → razvan@razvantoma.com
+# 4. The CF_ACCESS_TEAM_DOMAIN will be shown in your Access settings
+# 5. Add all secrets above via the Cloudflare Pages dashboard → Settings → Environment Variables
