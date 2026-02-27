@@ -112,12 +112,14 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
             padding: 8rem 2rem 6rem;
             position: relative;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 700px;
         }
 
         .hero-label {
@@ -137,9 +139,28 @@
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 span {
+        .rotating-container {
+            display: inline-block;
+            position: relative;
+            height: 1.2em;
+            vertical-align: bottom;
+            overflow: hidden;
+        }
+
+        .rotating-word {
+            position: absolute;
+            left: 0;
+            opacity: 0;
             font-weight: 300;
             color: var(--gray-400);
+            white-space: nowrap;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+
+        .rotating-word.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .hero-subtitle {
@@ -147,12 +168,13 @@
             color: var(--gray-400);
             max-width: 540px;
             line-height: 1.7;
-            margin-bottom: 2.5rem;
+            margin: 0 auto 2.5rem;
             font-weight: 300;
         }
 
         .hero-cta {
             display: flex;
+            justify-content: center;
             gap: 1rem;
         }
 
@@ -186,28 +208,6 @@
             border-color: var(--white);
         }
 
-        .stats-bar {
-            display: flex;
-            gap: 4rem;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--gray-800);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--gray-400);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
         .section {
             padding: 6rem 2rem;
             border-top: 1px solid var(--gray-800);
@@ -215,6 +215,7 @@
 
         .section-header {
             margin-bottom: 3rem;
+            text-align: center;
         }
 
         .section-label {
@@ -239,44 +240,110 @@
             max-width: 560px;
             line-height: 1.7;
             font-weight: 300;
+            margin: 0 auto;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1px;
-            background: var(--gray-800);
-            border: 1px solid var(--gray-800);
+        .carousel-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--gray-800);
+            overflow: hidden;
         }
 
-        .feature-card {
-            background: var(--black);
-            padding: 2rem;
-            transition: background 0.3s;
+        .carousel-header {
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .feature-card:hover {
+        .carousel-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .agent-card {
+            flex-shrink: 0;
+            width: 280px;
             background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 1.75rem;
+            transition: all 0.3s;
         }
 
-        .feature-number {
-            font-size: 0.75rem;
-            color: var(--gray-600);
+        .agent-card:hover {
+            border-color: var(--gray-600);
+            transform: translateY(-4px);
+        }
+
+        .agent-icon {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            font-weight: 500;
         }
 
-        .feature-title {
-            font-size: 1.125rem;
+        .agent-number {
+            font-size: 0.6875rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-title {
+            font-size: 1rem;
             font-weight: 500;
             margin-bottom: 0.75rem;
         }
 
-        .feature-text {
-            font-size: 0.9375rem;
+        .agent-text {
+            font-size: 0.8125rem;
             color: var(--gray-400);
             line-height: 1.6;
             font-weight: 300;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 0 2rem;
+        }
+
+        .carousel-btn {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--gray-600);
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 1.25rem;
+        }
+
+        .carousel-btn:hover {
+            border-color: var(--white);
+            background: var(--gray-900);
         }
 
         .process-list {
@@ -326,15 +393,12 @@
             gap: 1px;
             background: var(--gray-800);
             max-width: 800px;
+            margin: 0 auto;
         }
 
         .comparison-col {
             background: var(--black);
             padding: 2rem;
-        }
-
-        .comparison-col:first-child {
-            border-right: none;
         }
 
         .comparison-title {
@@ -363,10 +427,13 @@
 
         .integrations-list {
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 1px;
             background: var(--gray-800);
             padding: 1px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .integration-item {
@@ -447,10 +514,6 @@
                 text-align: center;
             }
 
-            .stats-bar {
-                gap: 2rem;
-            }
-
             .comparison-grid {
                 grid-template-columns: 1fr;
             }
@@ -460,6 +523,10 @@
                 gap: 1.5rem;
                 text-align: center;
             }
+
+            .agent-card {
+                width: 260px;
+            }
         }
     </style>
 </head>
@@ -467,7 +534,7 @@
     <nav>
         <a href="/" class="logo"><span>Big</span>ZEC</a>
         <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
+            <li><a href="#agents">Agents</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="#comparison">Why AI</a></li>
         </ul>
@@ -477,60 +544,90 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-label">AI GTM Department</p>
-            <h1>AI agents that replace your <span>growth team</span></h1>
+            <h1>AI agents that replace your <span class="rotating-container"><span class="rotating-word active">growth team</span><span class="rotating-word">creative agency</span><span class="rotating-word">AI strategist</span><span class="rotating-word">SDR team</span></span></h1>
             <p class="hero-subtitle">
                 Deploy a ready-made AI GTM department that researches your ICP, builds personas, launches campaigns, and optimizes pipeline autonomously—without adding headcount.
             </p>
             <div class="hero-cta">
                 <a href="#demo" class="btn-primary">Book a Demo</a>
-                <a href="#process" class="btn-secondary">See How It Works</a>
-            </div>
-            <div class="stats-bar">
-                <div>
-                    <div class="stat-value">4</div>
-                    <div class="stat-label">Core Agents</div>
-                </div>
-                <div>
-                    <div class="stat-value">Weeks 1-2</div>
-                    <div class="stat-label">To Live</div>
-                </div>
-                <div>
-                    <div class="stat-value">24/7</div>
-                    <div class="stat-label">Operation</div>
-                </div>
+                <a href="#agents" class="btn-secondary">See Our Agents</a>
             </div>
         </div>
     </section>
 
-    <section class="section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label">Capabilities</p>
-                <h2 class="section-title">What your AI GTM Department does</h2>
-                <p class="section-subtitle">Four core agents working continuously to accelerate your go-to-market.</p>
+    <section class="carousel-section" id="agents">
+        <div class="carousel-header">
+            <p class="section-label">AI Agents</p>
+            <h2 class="section-title">12 specialized agents for your GTM</h2>
+            <p class="section-subtitle">Each agent handles a specific GTM function, working 24/7 to accelerate your pipeline.</p>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="agent-card">
+                    <div class="agent-number">01</div>
+                    <h3 class="agent-title">ICP Research Agent</h3>
+                    <p class="agent-text">Continuously scans markets, competitors, and customer conversations to keep your ICPs updated in real-time.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">02</div>
+                    <h3 class="agent-title">Persona Builder</h3>
+                    <p class="agent-text">Transforms research into detailed buyer personas with messaging angles for ads, emails, and landing pages.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">03</div>
+                    <h3 class="agent-title">Content Writer</h3>
+                    <p class="agent-text">Creates LLM-optimized blog posts and content that gets cited by ChatGPT, Perplexity, and Claude.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">04</div>
+                    <h3 class="agent-title">Campaign Generator</h3>
+                    <p class="agent-text">Generates campaign ideas, creative variants, and test plans for Meta, Google, and outbound channels.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">05</div>
+                    <h3 class="agent-title">Lead Qualifier</h3>
+                    <p class="agent-text">Scores and qualifies leads automatically using firmographic data, behavioral signals, and engagement patterns.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">06</div>
+                    <h3 class="agent-title">Outreach Agent</h3>
+                    <p class="agent-text">Generates personalized outreach sequences, A/B tests messaging, and optimizes send times autonomously.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">07</div>
+                    <h3 class="agent-title">SDR Agent</h3>
+                    <p class="agent-text">Handles initial outreach, meeting scheduling, and follow-up sequences. Qualifies responses and hands off warm leads.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">08</div>
+                    <h3 class="agent-title">CRO Agent</h3>
+                    <p class="agent-text">Analyzes user behavior, identifies friction points, and generates conversion optimization test hypotheses.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">09</div>
+                    <h3 class="agent-title">Creative Strategist</h3>
+                    <p class="agent-text">Reverse-engineers winning ads and produces brand-adapted creative strategies using the P.D.A. framework.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">10</div>
+                    <h3 class="agent-title">Competitive Intel</h3>
+                    <p class="agent-text">Monitors competitor websites, pricing, and campaigns. Generates battlecards and alerts on market changes.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">11</div>
+                    <h3 class="agent-title">Influencer Scout</h3>
+                    <p class="agent-text">Finds and qualifies influencers, podcast guests, and partnership opportunities at scale across platforms.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">12</div>
+                    <h3 class="agent-title">Reporting Agent</h3>
+                    <p class="agent-text">Aggregates data across channels, identifies trends, and recommends next actions with prioritized insights.</p>
+                </div>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-number">01</div>
-                    <h3 class="feature-title">Research & ICP</h3>
-                    <p class="feature-text">Continuously scans your market, competitors, and customer conversations to keep your ICPs updated.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-number">02</div>
-                    <h3 class="feature-title">Personas & Messaging</h3>
-                    <p class="feature-text">Transforms research into detailed personas and messaging angles for ads, emails, and landing pages.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-number">03</div>
-                    <h3 class="feature-title">Campaigns & Experiments</h3>
-                    <p class="feature-text">Generates campaign ideas, creative variants, and test plans for Meta, Google, and outbound.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-number">04</div>
-                    <h3 class="feature-title">Reporting & Actions</h3>
-                    <p class="feature-text">Summarizes performance across channels and suggests the next best experiments.</p>
-                </div>
-            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-btn" id="prevBtn">&#8592;</button>
+            <button class="carousel-btn" id="nextBtn">&#8594;</button>
         </div>
     </section>
 
@@ -628,11 +725,62 @@
         <div class="footer-content">
             <p class="footer-logo"><span>Big</span>ZEC</p>
             <div class="footer-links">
-                <a href="#features">Features</a>
+                <a href="#agents">Agents</a>
                 <a href="/blog">Blog</a>
                 <a href="#demo">Demo</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        const words = document.querySelectorAll('.rotating-word');
+        let currentWord = 0;
+
+        function rotateWords() {
+            words[currentWord].classList.remove('active');
+            currentWord = (currentWord + 1) % words.length;
+            words[currentWord].classList.add('active');
+        }
+
+        setInterval(rotateWords, 2500);
+
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+
+        track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+        });
+
+        track.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        track.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        track.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 2;
+            track.scrollLeft = scrollLeft - walk;
+        });
+
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
