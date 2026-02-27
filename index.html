@@ -423,6 +423,86 @@
             border-top: 1px solid var(--gray-800);
         }
 
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 2rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--white);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            color: var(--black);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-tier {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-unit {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray-400);
+        }
+
+        .pricing-period {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+            padding: 0.625rem 0;
+            border-top: 1px solid var(--gray-800);
+            line-height: 1.5;
+        }
+
+        .pricing-features li:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
         .cta-section h2 {
             font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 600;
@@ -503,6 +583,14 @@
 
             .carousel-section {
                 padding: 4rem 1.5rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                order: -1;
             }
         }
     </style>
@@ -742,6 +830,51 @@
                 <span class="integration-item">Google Ads</span>
                 <span class="integration-item">LinkedIn</span>
                 <span class="integration-item">Slack</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Pricing</p>
+                <h2 class="section-title">Choose your AI GTM setup</h2>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Playground</div>
+                    <div class="pricing-price">$0</div>
+                    <div class="pricing-period">Free forever</div>
+                    <ul class="pricing-features">
+                        <li>Try a generic GTM agent in your browser</li>
+                        <li>See how it researches, reasons, and proposes GTM actions</li>
+                        <li>No integrations, limited runs per day</li>
+                    </ul>
+                    <a href="#demo" class="btn-secondary" style="width: 100%; text-align: center;">Start free</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-tier">Ready-Made GTM Agents</div>
+                    <div class="pricing-price">$1,000<span class="pricing-unit">/month</span></div>
+                    <div class="pricing-period">Production-ready agents</div>
+                    <ul class="pricing-features">
+                        <li>Access to production-ready GTM agents (research, personas, campaigns, reporting)</li>
+                        <li>Light integrations (export to CSV, basic CRM sync)</li>
+                        <li>Ideal for founders, growth leads, small agencies</li>
+                    </ul>
+                    <a href="#demo" class="btn-primary" style="width: 100%; text-align: center; display: block;">Start now</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">AI GTM Department</div>
+                    <div class="pricing-price">Custom</div>
+                    <div class="pricing-period">Talk to us</div>
+                    <ul class="pricing-features">
+                        <li>Fully custom AI GTM department for your stack</li>
+                        <li>Deep CRM + ads + analytics integrations</li>
+                        <li>Onboarding, support, governance</li>
+                    </ul>
+                    <a href="https://calendly.com/bigzec/gtm-demo" class="btn-secondary" style="width: 100%; text-align: center;">Book a 15-minute call</a>
+                </div>
             </div>
         </div>
     </section>
