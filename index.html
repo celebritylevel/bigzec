@@ -139,30 +139,6 @@
             margin-bottom: 1.5rem;
         }
 
-        .rotating-container {
-            display: inline-block;
-            position: relative;
-            height: 1.2em;
-            vertical-align: bottom;
-            overflow: hidden;
-        }
-
-        .rotating-word {
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            font-weight: 300;
-            color: var(--gray-400);
-            white-space: nowrap;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transform: translateY(20px);
-        }
-
-        .rotating-word.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .hero-subtitle {
             font-size: 1.125rem;
             color: var(--gray-400);
@@ -615,7 +591,7 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-label">AI GTM Department</p>
-            <h1>AI Agents <span class="rotating-container"><span class="rotating-word active">as</span><span class="rotating-word">for</span></span> your GTM team</h1>
+            <h1>AI Agents <span style="font-weight: 300; color: var(--gray-400);">as</span> your GTM team</h1>
             <p class="hero-subtitle">
                 Deploy a ready-made AI GTM department that researches your ICP, builds personas, launches campaigns, and optimizes pipeline autonomously—without adding headcount.
             </p>
@@ -903,18 +879,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        const words = document.querySelectorAll('.rotating-word');
-        let currentWord = 0;
-
-        function rotateWords() {
-            words[currentWord].classList.remove('active');
-            currentWord = (currentWord + 1) % words.length;
-            words[currentWord].classList.add('active');
-        }
-
-        setInterval(rotateWords, 2000);
-    </script>
 </body>
 </html>
