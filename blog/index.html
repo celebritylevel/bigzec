@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | BigZEC - AI GTM Insights</title>
+    <meta name="description" content="Expert insights on AI agents, go-to-market automation, and LLM optimization. Learn how to scale your GTM with AI.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui' font-size='14' font-weight='700' fill='%23fff'>BZ</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --gray-900: #171717;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-cta {
+            background: var(--white);
+            color: var(--black);
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--gray-200);
+        }
+
+        .hero {
+            padding: 10rem 2rem 4rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: var(--gray-400);
+            max-width: 500px;
+            font-weight: 300;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-grid {
+            display: grid;
+            gap: 1px;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-800);
+        }
+
+        .blog-card {
+            background: var(--black);
+            padding: 2rem;
+            transition: background 0.3s;
+            display: block;
+        }
+
+        .blog-card:hover {
+            background: var(--gray-900);
+        }
+
+        .blog-category {
+            font-size: 0.6875rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        footer {
+            padding: 2rem;
+            border-top: 1px solid var(--gray-800);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .footer-logo span {
+            font-weight: 300;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo"><span>Big</span>ZEC</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <a href="/#demo" class="nav-cta">Book Demo</a>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <p class="section-label">Blog</p>
+            <h1>AI GTM Insights</h1>
+            <p>Expert analysis on AI agents, go-to-market automation, and LLM optimization strategies for modern GTM teams.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Latest Articles</p>
+                <h2 class="section-title">2026 GTM Intelligence</h2>
+            </div>
+            <div class="blog-grid">
+                <a href="/blog/ai-agents-gtm-use-cases.html" class="blog-card">
+                    <span class="blog-category">AI Agents</span>
+                    <h3 class="blog-title">10 AI Agent Use Cases That Are Transforming GTM Teams in 2026</h3>
+                    <p class="blog-excerpt">From ICP research to campaign optimization, discover how AI agents are automating critical GTM functions and delivering measurable ROI.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>8 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/llm-optimization-guide.html" class="blog-card">
+                    <span class="blog-category">LLM Optimization</span>
+                    <h3 class="blog-title">How to Optimize Content for LLM Visibility in 2026: Complete Guide</h3>
+                    <p class="blog-excerpt">Master LLM optimization with proven tactics to get your brand cited by ChatGPT, Perplexity, and Claude.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>10 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/ai-vs-traditional-hiring.html" class="blog-card">
+                    <span class="blog-category">Strategy</span>
+                    <h3 class="blog-title">AI GTM Department vs Traditional Hiring: A Cost-Benefit Analysis</h3>
+                    <p class="blog-excerpt">Why 76% of B2B organizations are adopting agentic AI for GTM, and what the numbers actually show.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>6 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/ai-sales-agents.html" class="blog-card">
+                    <span class="blog-category">Sales</span>
+                    <h3 class="blog-title">AI Sales Agents: The Complete Guide to Autonomous Sales Development</h3>
+                    <p class="blog-excerpt">How AI sales agents are qualifying leads, booking meetings, and shortening sales cycles without human intervention.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>7 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/conversion-rate-optimization-ai.html" class="blog-card">
+                    <span class="blog-category">CRO</span>
+                    <h3 class="blog-title">35 AI Workflows That Increased Conversion Rates by 40%</h3>
+                    <p class="blog-excerpt">Real workflows used by SaaS companies to boost conversion through AI-powered voice-of-customer analysis and friction detection.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>5 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/linkedin-automation-ai.html" class="blog-card">
+                    <span class="blog-category">LinkedIn</span>
+                    <h3 class="blog-title">40 AI Workflows for LinkedIn Growth: The 2026 Playbook</h3>
+                    <p class="blog-excerpt">From ICP refinement to post automation, discover the AI workflows that are driving LinkedIn growth at scale.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>6 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/creative-strategy-ai.html" class="blog-card">
+                    <span class="blog-category">Creative</span>
+                    <h3 class="blog-title">How AI Is Replacing $5K Creative Strategy Briefs in 20 Minutes</h3>
+                    <p class="blog-excerpt">The P.D.A. framework and AI tools that are producing agency-quality creative strategies without the agency price tag.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>4 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/influencer-research-automation.html" class="blog-card">
+                    <span class="blog-category">Influencer</span>
+                    <h3 class="blog-title">Scalable Influencer Research: How AI Agents Find Partners in Minutes</h3>
+                    <p class="blog-excerpt">How AI agents are scraping, enriching, and qualifying influencers at scale—turning weeks of research into hours.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>5 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/ad-creative-reverse-engineering.html" class="blog-card">
+                    <span class="blog-category">Advertising</span>
+                    <h3 class="blog-title">Reverse-Engineering Winning Ads with AI: The 2026 Approach</h3>
+                    <p class="blog-excerpt">How Claude and other AI tools can analyze competitor ads and produce brand-adapted creative in minutes.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>4 min read</span>
+                    </div>
+                </a>
+                <a href="/blog/reddit-ai-seo.html" class="blog-card">
+                    <span class="blog-category">SEO</span>
+                    <h3 class="blog-title">Why Reddit Appears in 68% of AI Answers: The New SEO Playbook</h3>
+                    <p class="blog-excerpt">Reddit is now the most cited source in AI-generated answers. Here's how to optimize for this new reality.</p>
+                    <div class="blog-meta">
+                        <span>Feb 2026</span>
+                        <span>7 min read</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-logo"><span>Big</span>ZEC</p>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/#features">Features</a>
+                <a href="/#demo">Demo</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

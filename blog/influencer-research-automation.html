@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalable Influencer Research: How AI Agents Find Partners in Minutes | BigZEC</title>
+    <meta name="description" content="How AI agents are scraping, enriching, and qualifying influencers at scale—turning weeks of research into hours.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui' font-size='14' font-weight='700' fill='%23fff'>BZ</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --gray-900: #171717;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-800);
+        }
+        .logo { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; }
+        .logo span { font-weight: 300; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { color: var(--gray-400); font-size: 0.875rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta { background: var(--white); color: var(--black); padding: 0.625rem 1.25rem; font-size: 0.875rem; font-weight: 500; border: none; cursor: pointer; }
+        article { padding: 8rem 2rem 4rem; }
+        .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--gray-800); }
+        .article-category { font-size: 0.75rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .article-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+        .article-meta { font-size: 0.8125rem; color: var(--gray-600); }
+        .article-body { font-size: 1rem; color: var(--gray-400); }
+        .article-body h2 { font-size: 1.375rem; font-weight: 600; color: var(--white); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.125rem; font-weight: 500; color: var(--white); margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; }
+        .article-body strong { color: var(--white); font-weight: 500; }
+        .cta-box { background: var(--gray-900); border: 1px solid var(--gray-800); padding: 2rem; margin: 3rem 0; }
+        .cta-box h3 { font-size: 1.125rem; margin-bottom: 0.75rem; }
+        .cta-box p { font-size: 0.9375rem; margin-bottom: 1rem; }
+        .cta-box a { display: inline-block; background: var(--white); color: var(--black); padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; }
+        footer { padding: 2rem; border-top: 1px solid var(--gray-800); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { font-size: 0.875rem; font-weight: 500; }
+        .footer-logo span { font-weight: 300; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { font-size: 0.8125rem; color: var(--gray-400); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--white); }
+        @media (max-width: 768px) { .nav-links { display: none; } .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo"><span>Big</span>ZEC</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <a href="/#demo" class="nav-cta">Book Demo</a>
+    </nav>
+
+    <article>
+        <div class="container">
+            <header class="article-header">
+                <p class="article-category">Influencer</p>
+                <h1 class="article-title">Scalable Influencer Research: How AI Agents Find Partners in Minutes</h1>
+                <p class="article-meta">February 2026 · 5 min read</p>
+            </header>
+
+            <div class="article-body">
+                <p><strong>An agency needed 15 YouTube influencers for a client campaign. Using AI agents, they had a scalable system to find unlimited influencers in 30 minutes.</strong></p>
+
+                <p>This isn't just for influencers—the same approach finds podcast guests, partnerships, affiliates, and leads in any niche.</p>
+
+                <h2>The Traditional Influencer Research Problem</h2>
+                <p>Finding influencers manually means hours of searching, channel-by-channel evaluation, and contact extraction. When you need 15 influencers, you might manually review 100+ channels. When you need to scale, the process breaks.</p>
+
+                <h2>How AI Agents Automate Influencer Research</h2>
+                <p>The workflow combines Claude Code with SERP APIs to create a repeatable system:</p>
+
+                <h3>Step 1: SERP Scraping by Keywords</h3>
+                <p>Use Bright Data's YouTube SERP API to scrape search results by relevant keywords. This pulls all channels matching your criteria in seconds.</p>
+
+                <h3>Step 2: Channel Data Extraction</h3>
+                <p>AI extracts relevant channel data: subscriber count, video views, upload frequency, content themes. It identifies which channels fit your ICP criteria.</p>
+
+                <h3>Step 3: Enrichment</h3>
+                <p>Run quick enrichment to add additional data points: engagement rates, audience demographics, recent sponsorships. This scores influencer fit.</p>
+
+                <h3>Step 4: Contact Extraction</h3>
+                <p>Use regex to extract emails from channel pages and descriptions. AI can also cross-reference with LinkedIn and other platforms for additional contact methods.</p>
+
+                <h3>Step 5: Qualification and Scoring</h3>
+                <p>AI scores each influencer based on your criteria: audience size, engagement rate, content relevance, brand safety. Output is a prioritized list ready for outreach.</p>
+
+                <div class="cta-box">
+                    <h3>Deploy AI Influencer Research</h3>
+                    <p>BigZEC's AI GTM Department includes influencer research agents that find and qualify partners at scale.</p>
+                    <a href="/#demo">Book a Demo</a>
+                </div>
+
+                <h2>Beyond YouTube: The Same Approach Works For</h2>
+                <ul>
+                    <li><strong>Podcast guests:</strong> Find hosts in your niche with engaged audiences</li>
+                    <li><strong>Partnerships:</strong> Identify complementary brands for co-marketing</li>
+                    <li><strong>Affiliates:</strong> Discover content creators who drive conversions</li>
+                    <li><strong>Leads:</strong> Find potential customers in any niche</li>
+                    <li><strong>LinkedIn influencers:</strong> Map thought leaders in your industry</li>
+                </ul>
+
+                <h2>The Workflow Stack</h2>
+                <ul>
+                    <li><strong>Claude Code:</strong> Orchestrates the workflow and handles data processing</li>
+                    <li><strong>SERP API:</strong> Pulls search results at scale (Bright Data, SerpAPI, etc.)</li>
+                    <li><strong>Enrichment API:</strong> Adds additional data points</li>
+                    <li><strong>Regex/email extraction:</strong> Extracts contact information</li>
+                </ul>
+
+                <h2>Key Takeaways</h2>
+                <ol>
+                    <li>AI agents turn weeks of influencer research into hours</li>
+                    <li>The workflow is repeatable and scalable</li>
+                    <li>Same approach works for podcasts, partnerships, affiliates, and leads</li>
+                    <li>Cost is marginal compared to manual research time</li>
+                    <li>Output is a prioritized list ready for outreach</li>
+                    <li>Every founder and marketer should have this capability in their stack</li>
+                </ol>
+
+                <p>The teams winning at influencer marketing aren't working harder—they've built systems that find partners while they sleep.</p>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-logo"><span>Big</span>ZEC</p>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/#demo">Demo</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
