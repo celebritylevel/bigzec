@@ -244,13 +244,14 @@
         }
 
         .carousel-section {
-            padding: 6rem 0;
+            padding: 6rem 2rem;
             border-top: 1px solid var(--gray-800);
             overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .carousel-header {
-            padding: 0 2rem;
             margin-bottom: 2rem;
             text-align: center;
         }
@@ -258,92 +259,64 @@
         .carousel-container {
             position: relative;
             width: 100%;
+            overflow: hidden;
         }
 
         .carousel-track {
             display: flex;
-            gap: 1.5rem;
-            padding: 0 2rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            cursor: grab;
+            gap: 1rem;
+            animation: scroll 30s linear infinite;
         }
 
-        .carousel-track::-webkit-scrollbar {
-            display: none;
+        .carousel-track:hover {
+            animation-play-state: paused;
         }
 
-        .carousel-track:active {
-            cursor: grabbing;
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         .agent-card {
             flex-shrink: 0;
-            width: 280px;
+            width: 220px;
             background: var(--gray-900);
             border: 1px solid var(--gray-800);
-            padding: 1.75rem;
+            padding: 1.25rem;
             transition: all 0.3s;
         }
 
         .agent-card:hover {
             border-color: var(--gray-600);
-            transform: translateY(-4px);
-        }
-
-        .agent-icon {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
         }
 
         .agent-number {
-            font-size: 0.6875rem;
+            font-size: 0.625rem;
             color: var(--gray-600);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.375rem;
         }
 
         .agent-title {
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 500;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .agent-text {
-            font-size: 0.8125rem;
+            font-size: 0.75rem;
             color: var(--gray-400);
-            line-height: 1.6;
+            line-height: 1.5;
             font-weight: 300;
         }
 
         .carousel-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-            padding: 0 2rem;
-        }
-
-        .carousel-btn {
-            width: 48px;
-            height: 48px;
-            border: 1px solid var(--gray-600);
-            background: transparent;
-            color: var(--white);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            font-size: 1.25rem;
-        }
-
-        .carousel-btn:hover {
-            border-color: var(--white);
-            background: var(--gray-900);
+            display: none;
         }
 
         .process-list {
@@ -525,7 +498,11 @@
             }
 
             .agent-card {
-                width: 260px;
+                width: 180px;
+            }
+
+            .carousel-section {
+                padding: 4rem 1.5rem;
             }
         }
     </style>
@@ -562,72 +539,128 @@
             <p class="section-subtitle">Each agent handles a specific GTM function, working 24/7 to accelerate your pipeline.</p>
         </div>
         <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-track">
                 <div class="agent-card">
                     <div class="agent-number">01</div>
-                    <h3 class="agent-title">ICP Research Agent</h3>
-                    <p class="agent-text">Continuously scans markets, competitors, and customer conversations to keep your ICPs updated in real-time.</p>
+                    <h3 class="agent-title">ICP Research</h3>
+                    <p class="agent-text">Scans markets and competitors to keep ICPs updated in real-time.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">02</div>
                     <h3 class="agent-title">Persona Builder</h3>
-                    <p class="agent-text">Transforms research into detailed buyer personas with messaging angles for ads, emails, and landing pages.</p>
+                    <p class="agent-text">Creates buyer personas with messaging angles for all channels.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">03</div>
                     <h3 class="agent-title">Content Writer</h3>
-                    <p class="agent-text">Creates LLM-optimized blog posts and content that gets cited by ChatGPT, Perplexity, and Claude.</p>
+                    <p class="agent-text">LLM-optimized content that gets cited by AI search engines.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">04</div>
                     <h3 class="agent-title">Campaign Generator</h3>
-                    <p class="agent-text">Generates campaign ideas, creative variants, and test plans for Meta, Google, and outbound channels.</p>
+                    <p class="agent-text">Generates campaign ideas and test plans for all channels.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">05</div>
                     <h3 class="agent-title">Lead Qualifier</h3>
-                    <p class="agent-text">Scores and qualifies leads automatically using firmographic data, behavioral signals, and engagement patterns.</p>
+                    <p class="agent-text">Scores leads using firmographic data and engagement signals.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">06</div>
                     <h3 class="agent-title">Outreach Agent</h3>
-                    <p class="agent-text">Generates personalized outreach sequences, A/B tests messaging, and optimizes send times autonomously.</p>
+                    <p class="agent-text">Personalized sequences with A/B testing and optimization.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">07</div>
                     <h3 class="agent-title">SDR Agent</h3>
-                    <p class="agent-text">Handles initial outreach, meeting scheduling, and follow-up sequences. Qualifies responses and hands off warm leads.</p>
+                    <p class="agent-text">Handles outreach, scheduling, and qualifies warm leads.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">08</div>
                     <h3 class="agent-title">CRO Agent</h3>
-                    <p class="agent-text">Analyzes user behavior, identifies friction points, and generates conversion optimization test hypotheses.</p>
+                    <p class="agent-text">Identifies friction points and generates test hypotheses.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">09</div>
                     <h3 class="agent-title">Creative Strategist</h3>
-                    <p class="agent-text">Reverse-engineers winning ads and produces brand-adapted creative strategies using the P.D.A. framework.</p>
+                    <p class="agent-text">Reverse-engineers winning ads for your brand.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">10</div>
                     <h3 class="agent-title">Competitive Intel</h3>
-                    <p class="agent-text">Monitors competitor websites, pricing, and campaigns. Generates battlecards and alerts on market changes.</p>
+                    <p class="agent-text">Monitors competitors and generates battlecards.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">11</div>
                     <h3 class="agent-title">Influencer Scout</h3>
-                    <p class="agent-text">Finds and qualifies influencers, podcast guests, and partnership opportunities at scale across platforms.</p>
+                    <p class="agent-text">Finds and qualifies influencers and partners at scale.</p>
                 </div>
                 <div class="agent-card">
                     <div class="agent-number">12</div>
                     <h3 class="agent-title">Reporting Agent</h3>
-                    <p class="agent-text">Aggregates data across channels, identifies trends, and recommends next actions with prioritized insights.</p>
+                    <p class="agent-text">Aggregates data and recommends prioritized actions.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">01</div>
+                    <h3 class="agent-title">ICP Research</h3>
+                    <p class="agent-text">Scans markets and competitors to keep ICPs updated in real-time.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">02</div>
+                    <h3 class="agent-title">Persona Builder</h3>
+                    <p class="agent-text">Creates buyer personas with messaging angles for all channels.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">03</div>
+                    <h3 class="agent-title">Content Writer</h3>
+                    <p class="agent-text">LLM-optimized content that gets cited by AI search engines.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">04</div>
+                    <h3 class="agent-title">Campaign Generator</h3>
+                    <p class="agent-text">Generates campaign ideas and test plans for all channels.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">05</div>
+                    <h3 class="agent-title">Lead Qualifier</h3>
+                    <p class="agent-text">Scores leads using firmographic data and engagement signals.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">06</div>
+                    <h3 class="agent-title">Outreach Agent</h3>
+                    <p class="agent-text">Personalized sequences with A/B testing and optimization.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">07</div>
+                    <h3 class="agent-title">SDR Agent</h3>
+                    <p class="agent-text">Handles outreach, scheduling, and qualifies warm leads.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">08</div>
+                    <h3 class="agent-title">CRO Agent</h3>
+                    <p class="agent-text">Identifies friction points and generates test hypotheses.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">09</div>
+                    <h3 class="agent-title">Creative Strategist</h3>
+                    <p class="agent-text">Reverse-engineers winning ads for your brand.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">10</div>
+                    <h3 class="agent-title">Competitive Intel</h3>
+                    <p class="agent-text">Monitors competitors and generates battlecards.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">11</div>
+                    <h3 class="agent-title">Influencer Scout</h3>
+                    <p class="agent-text">Finds and qualifies influencers and partners at scale.</p>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-number">12</div>
+                    <h3 class="agent-title">Reporting Agent</h3>
+                    <p class="agent-text">Aggregates data and recommends prioritized actions.</p>
                 </div>
             </div>
-        </div>
-        <div class="carousel-nav">
-            <button class="carousel-btn" id="prevBtn">&#8592;</button>
-            <button class="carousel-btn" id="nextBtn">&#8594;</button>
         </div>
     </section>
 
@@ -743,44 +776,6 @@
         }
 
         setInterval(rotateWords, 2500);
-
-        const track = document.getElementById('carouselTrack');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        let isDragging = false;
-        let startX;
-        let scrollLeft;
-
-        track.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - track.offsetLeft;
-            scrollLeft = track.scrollLeft;
-        });
-
-        track.addEventListener('mouseleave', () => {
-            isDragging = false;
-        });
-
-        track.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        track.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 2;
-            track.scrollLeft = scrollLeft - walk;
-        });
-
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -300, behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: 300, behavior: 'smooth' });
-        });
     </script>
 </body>
 </html>
