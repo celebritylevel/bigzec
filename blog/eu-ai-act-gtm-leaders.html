@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU AI Act for GTM Leaders: What You Actually Need to Know | BigZEC</title>
+    <meta name="description" content="The EU AI Act explained for GTM teams. Understand your compliance requirements without reading 400 pages of regulation.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui' font-size='14' font-weight='700' fill='%23fff'>BZ</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --gray-900: #171717;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-800);
+        }
+        .logo { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; }
+        .logo span { font-weight: 300; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { color: var(--gray-400); font-size: 0.875rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta { background: var(--white); color: var(--black); padding: 0.625rem 1.25rem; font-size: 0.875rem; font-weight: 500; border: none; cursor: pointer; }
+        article { padding: 8rem 2rem 4rem; }
+        .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--gray-800); }
+        .article-category { font-size: 0.75rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .article-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+        .article-meta { font-size: 0.8125rem; color: var(--gray-600); }
+        .article-body { font-size: 1rem; color: var(--gray-400); }
+        .article-body h2 { font-size: 1.375rem; font-weight: 600; color: var(--white); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.125rem; font-weight: 500; color: var(--white); margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; }
+        .article-body strong { color: var(--white); font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9375rem; }
+        th, td { padding: 0.875rem 1rem; text-align: left; border-bottom: 1px solid var(--gray-800); }
+        th { background: var(--gray-900); font-weight: 500; color: var(--white); }
+        td { color: var(--gray-400); }
+        .cta-box { background: var(--gray-900); border: 1px solid var(--gray-800); padding: 2rem; margin: 3rem 0; }
+        .cta-box h3 { font-size: 1.125rem; margin-bottom: 0.75rem; }
+        .cta-box p { font-size: 0.9375rem; margin-bottom: 1rem; }
+        .cta-box a { display: inline-block; background: var(--white); color: var(--black); padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; }
+        footer { padding: 2rem; border-top: 1px solid var(--gray-800); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { font-size: 0.875rem; font-weight: 500; }
+        .footer-logo span { font-weight: 300; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { font-size: 0.8125rem; color: var(--gray-400); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--white); }
+        @media (max-width: 768px) { .nav-links { display: none; } .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo"><span>Big</span>ZEC</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <a href="/#demo" class="nav-cta">Book Demo</a>
+    </nav>
+
+    <article>
+        <div class="container">
+            <header class="article-header">
+                <p class="article-category">AI Governance</p>
+                <h1 class="article-title">EU AI Act for GTM Leaders: What You Actually Need to Know</h1>
+                <p class="article-meta">February 2026 · 8 min read</p>
+            </header>
+
+            <div class="article-body">
+                <p><strong>The EU AI Act is 400+ pages. Here's what matters for GTM teams deploying AI agents.</strong></p>
+
+                <p>This isn't legal advice. This is the operational summary that lets you move forward with AI GTM without getting stopped by legal review.</p>
+
+                <h2>What Is the EU AI Act?</h2>
+                <p>The EU AI Act (Regulation 2024/1689) is the world's first comprehensive AI regulation. It establishes a risk-based framework that applies different rules based on how risky an AI application is. It affects any organization deploying AI in the EU market—regardless of where the company is based.</p>
+
+                <h2>The Four Risk Tiers</h2>
+                <p>The Act classifies AI systems into four categories, with compliance obligations scaling accordingly:</p>
+
+                <table>
+                    <tr>
+                        <th>Risk Level</th>
+                        <th>Examples</th>
+                        <th>Compliance Burden</th>
+                    </tr>
+                    <tr>
+                        <td>Unacceptable</td>
+                        <td>Social scoring, manipulative AI</td>
+                        <td>Banned</td>
+                    </tr>
+                    <tr>
+                        <td>High-Risk</td>
+                        <td>Employment screening, credit decisions</td>
+                        <td>Strict obligations</td>
+                    </tr>
+                    <tr>
+                        <td>Limited</td>
+                        <td>Chatbots, content generation</td>
+                        <td>Transparency rules</td>
+                    </tr>
+                    <tr>
+                        <td>Minimal</td>
+                        <td>Spam filters, analytics tools</td>
+                        <td>Largely unregulated</td>
+                    </tr>
+                </table>
+
+                <h2>Where GTM AI Agents Land</h2>
+                <p>Most AI GTM applications fall into limited or minimal risk:</p>
+                <ul>
+                    <li><strong>Content generation agents:</strong> Minimal risk</li>
+                    <li><strong>Email outreach agents:</strong> Limited risk (transparency required)</li>
+                    <li><strong>Lead scoring agents:</strong> Limited to minimal risk</li>
+                    <li><strong>Campaign optimization:</strong> Minimal risk</li>
+                    <li><strong>Customer service chatbots:</strong> Limited risk (disclosure required)</li>
+                    <li><strong>Sales candidate screening:</strong> High-risk (strict obligations)</li>
+                </ul>
+
+                <p>The key distinction: if AI makes decisions about access to services, employment, or credit, it's high-risk. If AI generates content, optimizes campaigns, or assists with research, it's typically lower risk.</p>
+
+                <h2>Key Dates GTM Leaders Need to Know</h2>
+                <ul>
+                    <li><strong>February 2025:</strong> AI literacy training required for staff (already in effect)</li>
+                    <li><strong>February 2025:</strong> Prohibited AI practices banned (already in effect)</li>
+                    <li><strong>August 2025:</strong> GPAI model obligations effective</li>
+                    <li><strong>August 2026:</strong> High-risk AI system obligations take full effect</li>
+                </ul>
+
+                <h2>What Limited Risk Means in Practice</h2>
+                <p>For GTM teams, limited risk AI (the most common category) requires:</p>
+
+                <h3>Transparency</h3>
+                <p>When customers interact with AI, disclose it. Chatbots, automated emails, AI-generated content recommendations—all require disclosure.</p>
+
+                <h3>Documentation</h3>
+                <p>Maintain records of what AI does, what data it uses, and how decisions are made. This isn't extensive high-risk documentation, but basic record-keeping is required.</p>
+
+                <h3>Human Oversight</h3>
+                <p>Even for limited risk applications, maintain human checkpoints. AI proposes, humans review for anything customer-facing.</p>
+
+                <div class="cta-box">
+                    <h3>Deploy AI GTM Agents with Built-In Compliance</h3>
+                    <p>BigZEC's AI GTM Department provides risk classification, documentation, and transparency controls by default.</p>
+                    <a href="/#demo">Book a Demo</a>
+                </div>
+
+                <h2>What High-Risk Means (If You're Affected)</h2>
+                <p>If your GTM AI screens job candidates or makes credit decisions, you face strict obligations:</p>
+                <ul>
+                    <li>Risk management system</li>
+                    <li>Data governance requirements</li>
+                    <li>Technical documentation</li>
+                    <li>Record-keeping and logging</li>
+                    <li>Human oversight provisions</li>
+                    <li>Accuracy, robustness, and cybersecurity requirements</li>
+                    <li>Fundamental rights impact assessment</li>
+                </ul>
+
+                <h2>What This Means for Vendor Selection</h2>
+                <p>Before signing any AI GTM vendor, verify:</p>
+                <ol>
+                    <li>They've classified their AI system under the Act</li>
+                    <li>They provide compliance documentation</li>
+                    <li>They support transparency requirements</li>
+                    <li>They maintain appropriate data governance</li>
+                    <li>They have incident response procedures</li>
+                </ol>
+
+                <h2>Key Takeaways</h2>
+                <ol>
+                    <li>Most GTM AI is limited or minimal risk—not high-risk</li>
+                    <li>Limited risk means transparency, not heavy compliance</li>
+                    <li>AI literacy training is already required for your team</li>
+                    <li>High-risk obligations kick in August 2026</li>
+                    <li>Vendor selection is your compliance checkpoint</li>
+                    <li>Disclose AI interaction to customers—it's not optional</li>
+                </ol>
+
+                <p>The EU AI Act isn't a barrier to AI GTM adoption. It's a framework that, when understood, lets you move forward confidently with the right vendors and the right documentation.</p>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-logo"><span>Big</span>ZEC</p>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/#demo">Demo</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

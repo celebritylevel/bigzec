@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI GTM Stack: Governance Checklist You Can Show Your CISO | BigZEC</title>
+    <meta name="description" content="A practical governance checklist for AI GTM tools. Everything you need to satisfy your CISO and legal team before deployment.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui' font-size='14' font-weight='700' fill='%23fff'>BZ</text></svg>" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --gray-900: #171717;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-800);
+        }
+        .logo { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; }
+        .logo span { font-weight: 300; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { color: var(--gray-400); font-size: 0.875rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta { background: var(--white); color: var(--black); padding: 0.625rem 1.25rem; font-size: 0.875rem; font-weight: 500; border: none; cursor: pointer; }
+        article { padding: 8rem 2rem 4rem; }
+        .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--gray-800); }
+        .article-category { font-size: 0.75rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .article-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+        .article-meta { font-size: 0.8125rem; color: var(--gray-600); }
+        .article-body { font-size: 1rem; color: var(--gray-400); }
+        .article-body h2 { font-size: 1.375rem; font-weight: 600; color: var(--white); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.125rem; font-weight: 500; color: var(--white); margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; }
+        .article-body strong { color: var(--white); font-weight: 500; }
+        .checklist { margin: 1.5rem 0; }
+        .checklist-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--gray-800); }
+        .checklist-box { width: 20px; height: 20px; border: 1px solid var(--gray-600); flex-shrink: 0; margin-top: 2px; }
+        .checklist-content h4 { font-size: 0.9375rem; font-weight: 500; color: var(--white); margin-bottom: 0.25rem; }
+        .checklist-content p { font-size: 0.875rem; margin: 0; }
+        .cta-box { background: var(--gray-900); border: 1px solid var(--gray-800); padding: 2rem; margin: 3rem 0; }
+        .cta-box h3 { font-size: 1.125rem; margin-bottom: 0.75rem; }
+        .cta-box p { font-size: 0.9375rem; margin-bottom: 1rem; }
+        .cta-box a { display: inline-block; background: var(--white); color: var(--black); padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; }
+        footer { padding: 2rem; border-top: 1px solid var(--gray-800); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { font-size: 0.875rem; font-weight: 500; }
+        .footer-logo span { font-weight: 300; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { font-size: 0.8125rem; color: var(--gray-400); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--white); }
+        @media (max-width: 768px) { .nav-links { display: none; } .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo"><span>Big</span>ZEC</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <a href="/#demo" class="nav-cta">Book Demo</a>
+    </nav>
+
+    <article>
+        <div class="container">
+            <header class="article-header">
+                <p class="article-category">AI Governance</p>
+                <h1 class="article-title">Your AI GTM Stack: Governance Checklist You Can Show Your CISO</h1>
+                <p class="article-meta">February 2026 · 6 min read</p>
+            </header>
+
+            <div class="article-body">
+                <p><strong>Your CISO doesn't want to block your AI GTM deployment. They want to know you've thought through the risks.</strong> This checklist gives you the answers they need—and the documentation to prove it.</p>
+
+                <h2>Why This Checklist Matters</h2>
+                <p>AI governance isn't bureaucracy. It's the infrastructure that determines how safely and how fast AI can scale in your organization. Companies that treat governance as documentation slow down. Companies that treat it as infrastructure scale with confidence.</p>
+
+                <p>The checklist below covers every question your CISO, legal team, and compliance officers will ask.</p>
+
+                <h2>AI GTM Governance Checklist</h2>
+
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Risk Classification Documented</h4>
+                            <p>Each AI agent is classified under the EU AI Act risk framework (unacceptable, high-risk, limited, minimal).</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Use Case Documentation</h4>
+                            <p>Every AI agent has documented: purpose, data accessed, decisions influenced, and human oversight points.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Data Governance Defined</h4>
+                            <p>Clear policies on what data AI can access, how it's processed, retention periods, and deletion procedures.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Human Oversight Controls</h4>
+                            <p>Defined checkpoints where humans review, approve, or override AI decisions before execution.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Transparency Disclosures</h4>
+                            <p>Customer-facing AI interactions are disclosed. Chatbots, automated emails, and AI-generated content clearly labeled.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Vendor Compliance Verification</h4>
+                            <p>All AI vendors have provided risk classification, compliance documentation, and incident response procedures.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Logging and Record-Keeping</h4>
+                            <p>AI decisions are logged with timestamps, inputs, and outputs. Records maintained for audit requirements.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Incident Response Plan</h4>
+                            <p>Defined process for handling AI failures, errors, or unintended outcomes. Escalation paths documented.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Team AI Literacy Training</h4>
+                            <p>Staff using AI GTM tools have completed required AI literacy training (EU AI Act requirement since Feb 2025).</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-box"></div>
+                        <div class="checklist-content">
+                            <h4>Regular Review Schedule</h4>
+                            <p>Quarterly review of AI agent performance, risk classification accuracy, and compliance status.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Get a Pre-Built Governance Package</h3>
+                    <p>BigZEC's AI GTM Department includes documentation, risk classification, and compliance controls ready for your CISO.</p>
+                    <a href="/#demo">Book a Demo</a>
+                </div>
+
+                <h2>How to Use This Checklist</h2>
+                <h3>Before Deployment</h3>
+                <p>Work through each item with your AI vendor. If they can't provide answers, they're not enterprise-ready.</p>
+
+                <h3>During Deployment</h3>
+                <p>Document as you implement. The checklist becomes your compliance evidence.</p>
+
+                <h3>Ongoing Operations</h3>
+                <p>Quarterly reviews ensure continued compliance as AI systems evolve and regulations change.</p>
+
+                <h2>What Your CISO Actually Wants to Know</h2>
+                <p>Beyond the checklist, prepare to answer:</p>
+                <ul>
+                    <li>What happens when AI makes a wrong decision?</li>
+                    <li>Who can override AI decisions?</li>
+                    <li>What data leaves our environment?</li>
+                    <li>How do we detect AI failures?</li>
+                    <li>What's our liability exposure?</li>
+                    <li>How do we prove compliance to regulators?</li>
+                </ul>
+
+                <h2>Key Takeaways</h2>
+                <ol>
+                    <li>Governance is infrastructure, not documentation</li>
+                    <li>10 items cover what CISO, legal, and compliance need</li>
+                    <li>AI literacy training is already a legal requirement</li>
+                    <li>Vendor compliance verification is your responsibility</li>
+                    <li>Document before you deploy, not after</li>
+                    <li>Quarterly reviews maintain compliance as AI evolves</li>
+                </ol>
+
+                <p>The organizations scaling AI GTM fastest aren't skipping governance—they've built it into their vendor selection and deployment process from the start.</p>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-logo"><span>Big</span>ZEC</p>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/#demo">Demo</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
